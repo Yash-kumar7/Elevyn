@@ -8,4 +8,5 @@ Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-fram
 [addresses]
 SuiFramework = "0x2"
 sui_place = "0x0"
+sui_crowdfunding=0x3"
 

@@ -6,7 +6,6 @@ const provider = new SuiClient({
   url: 'https://fullnode.testnet.sui.io:443', // Sui testnet RPC URL
 });
 
-
 // Function to request SUI from the faucet
 async function requestSuiFromFaucet(senderAddress) {
   try {
@@ -31,36 +30,82 @@ async function requestSuiFromFaucet(senderAddress) {
   }
 }
 
-
-async function logDonationOnSui(donorAddress, amount, xrpTransactionHash) {
+async function logDonationOnSui() {
   try {
-    // Create a new transaction
+    // Create a transaction
     const tx = new Transaction();
 
-    // Convert the XRP transaction hash to bytes (vector<u8> BCS type)
-    const xrpHashBytes = new TextEncoder().encode(xrpTransactionHash);
+    // Set the sender address (replace with your valid Sui address)
+    const senderAddress = '0xd0cf587cb18334404a4ab074f81c63500408059aaf1460d8f6d63f7f526b279a';
+    tx.setSender(senderAddress);
 
-    // Add a move call for logging the donation
+    // Donor address (valid Sui address as an object ID)
+    const donorAddress = '0x1bb61813baab59d08ff5538ef68974e882e3c2f85a5064c029432c3d7c962a7a';
+
+    // Amount (u64) and timestamp (u64)
+    const donationAmount = 1000; // Example donation amount (u64)
+    const donationTimestamp = Math.floor(Date.now() / 1000); // Current timestamp in seconds (u64)
+
+    // Fetch available gas coins for the sender
+    let coins = await provider.getCoins({ owner: senderAddress });
+
+    // If no gas coins are available, request from the faucet
+    if (!coins || coins.data.length === 0) {
+      console.log('No gas coins available, requesting from the faucet...');
+      await requestSuiFromFaucet(senderAddress);
+
+      // Wait for a few seconds to allow the faucet transaction to be processed
+      await new Promise(resolve => setTimeout(resolve, 5000));
+
+      // Re-fetch coins after requesting from the faucet
+      coins = await provider.getCoins({ owner: senderAddress });
+    }
+
+    // Log the coin details to debug
+    //Need to uncomment it
+    // console.log('Fetched Coins:', coins);
+
+    // Check if there are any valid gas coins after the faucet request
+    if (!coins || coins.data.length === 0) {
+      throw new Error('No gas coins available after faucet request.');
+    }
+
+    // Get the first gas coin and its details
+    const gasCoin = coins.data[0]; // Using the first available gas coin
+
+    // Ensure that gasCoin has version and digest fields
+    if (!gasCoin.version || !gasCoin.digest) {
+      throw new Error('Invalid gas coin data. Missing version or digest.');
+    }
+
+    // Log the gas coin details to debug
+    console.log('Using Gas Coin:', gasCoin);
+
+    // Set gas payment with the full details (objectId, version, digest)
+    tx.setGasPayment([{
+      objectId: gasCoin.coinObjectId,
+      version: gasCoin.version,
+      digest: gasCoin.digest
+    }]);
+
+    // Log donation with Sui Move call
     tx.moveCall({
       target: `${process.env.SUI_PACKAGE_OBJECT_ID}::place::log_donation`,
       arguments: [
-        tx.object(donorAddress),  // Donor address as an object reference
-        tx.pure(BigInt(amount), 'u64'),    // Amount as 'u64' BCS type
-        tx.pure(BigInt(Math.floor(Date.now() / 1000)), 'u64'),  // Timestamp as 'u64' BCS type
-        tx.pure(xrpHashBytes, 'vector<u8>')  // XRP transaction hash as vector<u8>
+        tx.object(donorAddress), // Donor address (Sui object ID)
+        tx.pure.u64(donationAmount), // Donation amount (u64)
+        tx.pure.u64(donationTimestamp), // Timestamp (u64)
       ],
     });
 
-    // Sign and execute the transaction
-    const response = await provider.signAndExecuteTransaction({
-      transaction: tx,
-      requestType: 'WaitForLocalExecution',  // Wait for transaction confirmation
-    });
+    // Get transaction bytes without signing or executing
+    const transactionBytes = await tx.build({ client: provider });
 
-    console.log('Donation logged on Sui:', response);
-    return response;
+    //Need to uncomment it
+    // console.log('Transaction Bytes:', transactionBytes);
+    return transactionBytes;
   } catch (error) {
-    console.error('Error logging donation on Sui:', error.message);
+    console.error('Error building transaction:', error.message);
     throw error;
   }
 }
