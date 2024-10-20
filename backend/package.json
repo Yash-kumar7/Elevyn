@@ -1,0 +1,24 @@
+{
+    "name": "donation-tracker-backend",
+    "version": "1.0.0",
+    "description": "Backend for Decentralized Donation Tracker using Ripple and Sui",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "@eluvio/elv-client-js": "^4.0.100",
+        "@mysten/sui": "^1.13.0",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "ripple-lib": "^1.10.0",
+        "xrpl": "^4.0.0"
+    },
+    "author": "Yash Kumar",
+    "license": "MIT"
+}
