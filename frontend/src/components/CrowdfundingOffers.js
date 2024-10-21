@@ -5,71 +5,71 @@ const crowdfundingOffers = [
   {
     id: 1,
     name: 'Project Alpha',
-    goal: '5000 USD',
-    raised: '1500 USD',
+    goal: '5000 XRP',
+    raised: '1500 XRP',
     tiers: [
-      { amount: '50 USD', reward: 'Thank You Shoutout' },
-      { amount: '100 USD', reward: 'Exclusive Video Content' },
-      { amount: '200 USD', reward: 'Personalized Thank You Shoutout + Exclusive Video Content' }
+      { amount: '50 XRP', reward: 'Thank You Shoutout' },
+      { amount: '100 XRP', reward: 'Exclusive Video Content' },
+      { amount: '200 XRP', reward: 'Personalized Thank You Shoutout + Exclusive Video Content' }
     ],
     address: '0xA1B2C3D4E5F678901234567890ABCDEF12345678'
   },
   {
     id: 2,
     name: 'Project Beta',
-    goal: '10000 USD',
-    raised: '4000 USD',
+    goal: '10000 XRP',
+    raised: '4000 XRP',
     tiers: [
-      { amount: '100 USD', reward: 'Exclusive Webinar' },
-      { amount: '500 USD', reward: 'One-on-One Consultation' },
+      { amount: '100 XRP', reward: 'Exclusive Webinar' },
+      { amount: '500 XRP', reward: 'One-on-One Consultation' },
     ],
     address: '0x1234ABCDEF5678901234567890ABCDEF12345678'
   },
   {
     id: 3,
     name: 'CryptoArt NFT Series',
-    goal: '15000 USD',
-    raised: '5000 USD',
+    goal: '15000 XRP',
+    raised: '5000 XRP',
     tiers: [
-      { amount: '200 USD', reward: 'Limited Edition NFT' },
-      { amount: '500 USD', reward: 'NFT + Early Access to the Next Collection' },
-      { amount: '1000 USD', reward: 'Personalized NFT + Artist Video Message' }
+      { amount: '200 XRP', reward: 'Limited Edition NFT' },
+      { amount: '500 XRP', reward: 'NFT + Early Access to the Next Collection' },
+      { amount: '1000 XRP', reward: 'Personalized NFT + Artist Video Message' }
     ],
     address: '0x123456789ABCDEF9876543210FEDCBA98765432'
   },
   {
     id: 4,
     name: 'Personalized Video Shoutout Campaign',
-    goal: '2000 USD',
-    raised: '1200 USD',
+    goal: '2000 XRP',
+    raised: '1200 XRP',
     tiers: [
-      { amount: '50 USD', reward: 'Personalized Shoutout Video' },
-      { amount: '100 USD', reward: 'Shoutout Video + Custom Video Content' },
-      { amount: '250 USD', reward: 'Custom Video Content + Exclusive Video Call' }
+      { amount: '50 XRP', reward: 'Personalized Shoutout Video' },
+      { amount: '100 XRP', reward: 'Shoutout Video + Custom Video Content' },
+      { amount: '250 XRP', reward: 'Custom Video Content + Exclusive Video Call' }
     ],
     address: '0x9876543210FEDCBA1234567890ABCDEF98765432'
   },
   {
     id: 5,
     name: 'Live Streaming Crypto Event',
-    goal: '10000 USD',
-    raised: '4000 USD',
+    goal: '10000 XRP',
+    raised: '4000 XRP',
     tiers: [
-      { amount: '100 USD', reward: 'Access to the Live Stream' },
-      { amount: '500 USD', reward: 'VIP Access + Q&A with Host' },
-      { amount: '1000 USD', reward: 'Exclusive Post-Event Content + NFT Ticket' }
+      { amount: '100 XRP', reward: 'Access to the Live Stream' },
+      { amount: '500 XRP', reward: 'VIP Access + Q&A with Host' },
+      { amount: '1000 XRP', reward: 'Exclusive Post-Event Content + NFT Ticket' }
     ],
     address: '0xFEDCBA987654321001234567890ABCDEF1234567'
   },
   {
     id: 6,
     name: 'Blockchain Gaming Tournament',
-    goal: '20000 USD',
-    raised: '7000 USD',
+    goal: '20000 XRP',
+    raised: '7000 XRP',
     tiers: [
-      { amount: '50 USD', reward: 'Exclusive Game Content NFT' },
-      { amount: '200 USD', reward: 'Tournament Pass + NFT' },
-      { amount: '500 USD', reward: 'VIP Access + Personalized In-Game Item' }
+      { amount: '50 XRP', reward: 'Exclusive Game Content NFT' },
+      { amount: '200 XRP', reward: 'Tournament Pass + NFT' },
+      { amount: '500 XRP', reward: 'VIP Access + Personalized In-Game Item' }
     ],
     address: '0xABCDEF12345678901234567890ABCDEF12345678'
   }
